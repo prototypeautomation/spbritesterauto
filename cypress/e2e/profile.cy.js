@@ -1,0 +1,158 @@
+require('cypress-xpath');
+const getData = require('../data/data');
+const get = require('../data/environtment');
+const testingFrom = require('../data/testCase');
+const execute = require('../module/function');
+
+describe('Automated Test Profile pages', () => {
+  it(testingFrom.ProfileFlow.TS001, () => {
+    cy.visit(get.env.STAGING_WEB_PORTAL);
+    cy.wait(3000)
+    cy.get('.css-13jvj27 > .chakra-button').click();
+    cy.wait(2000)
+    cy.get('[placeholder="Enter personal number"]').type(getData.user8101995.PersonalNumber)
+    cy.wait(1000)
+    cy.get('[placeholder="Enter your password"]').type(getData.user8101995.Password)
+    cy.wait(1000)
+    cy.get('.chakra-button').click()
+    cy.wait(5000)
+    cy.get('#profile-tab-list > a[data-index="0"]').click()
+    cy.wait(1000)
+    cy.xpath('//*[@id="field-:re:"]').should('have.value', getData.user8101995.PersonalNumber)
+    cy.xpath('//*[@id="field-:re:"]').should('have.attr', 'readonly')
+    cy.xpath('//*[@id="field-:rf:"]').should('have.value', getData.user8101995.Email)
+    cy.xpath('//*[@id="field-:rf:"]').should('have.attr', 'readonly')
+    cy.xpath('//*[@id="field-:rg:"]').should('have.value', getData.user8101995.NamaLengkap)
+    cy.xpath('//*[@id="field-:rh:"]').should('have.value', getData.user8101995.Jabatan) //Business Analyst
+    cy.xpath('//*[@id="field-:ri:"]').should('have.value', getData.user8101995.NoTelepon)
+    cy.xpath('//*[@id="field-:rj:"]').should('have.value', getData.user8101995.Tempatlahir)
+    cy.xpath('//*[@id="field-:rk:"]').should('have.value', getData.user8101995.TanggalLahir)
+    cy.xpath('//*[@id="field-:rl:"]').should('have.value', getData.user8101995.NoRekeningPayroll)
+    cy.xpath('//*[@id="field-:rm:"]').should('have.value', getData.user8101995.UnitKerja) //Nasional
+  })
+
+  it(testingFrom.ProfileFlow.TS002, () => {
+      cy.visit(get.env.STAGING_WEB_PORTAL);
+      cy.wait(3000)
+      cy.get('.css-13jvj27 > .chakra-button').click();
+      cy.wait(2000)
+      cy.get('[placeholder="Enter personal number"]').type(getData.user8101995.PersonalNumber)
+      cy.wait(1000)
+      cy.get('[placeholder="Enter your password"]').type(getData.user8101995.Password)
+      cy.wait(1000)
+      cy.get('.chakra-button').click()
+      cy.wait(5000)
+      cy.get('#profile-tab-list > a[data-index="1"]').click()
+      cy.wait(3000)
+      cy.scrollTo(0, 400)
+      cy.wait(1000)
+      cy.get('[fill="black"]').should('contain', getData.user8101995.NamaLengkap)
+      cy.get('[fill="#11114f"]').should('contain', getData.user8101995.PersonalNumber)
+      cy.get('.chakra-button').should('be.enabled')
+  })
+
+  it(testingFrom.ProfileFlow.TS003, () => {
+    cy.visit(get.env.STAGING_WEB_PORTAL);
+    cy.wait(3000)
+    cy.get('.css-13jvj27 > .chakra-button').click();
+    cy.wait(2000)
+    cy.get('[placeholder="Enter personal number"]').type(getData.user8101995.PersonalNumber)
+    cy.wait(1000)
+    cy.get('[placeholder="Enter your password"]').type(getData.user8101995.Password)
+    cy.wait(1000)
+    cy.get('.chakra-button').click()
+    cy.wait(5000)
+    cy.get('#profile-tab-list > a[data-index="0"]').click()
+    cy.wait(1000)
+    cy.xpath('//*[@id="field-:rg:"]').type('{selectAll}' + getData.user8101995.NamaLengkap)
+    cy.xpath('//*[@id="field-:ri:"]').type('{selectAll}' + getData.user8101995.NoTelepon)
+    cy.xpath('//*[@id="field-:rj:"]').type('{selectAll}' + getData.user8101995.Tempatlahir)
+    cy.xpath('//*[@id="field-:rk:"]').type(getData.user8101995.TanggalLahir)
+    cy.xpath('//*[@id="field-:rl:"]').type('{selectAll}' + getData.user8101995.NoRekeningPayroll)
+    cy.xpath('//*[@id="field-:rm:"]').type(getData.user8101995.UnitKerja)
+    cy.scrollTo(0, 400)
+    cy.get('.chakra-button').click()
+    cy.wait(6000)
+    cy.get('#toast-1-description').should('contain', 'Successfully update '+ getData.user8101995.NamaLengkap +' profil.')
+    cy.wait(1000)
+    cy.get('#profile-tab-list > a[data-index="1"]').click()
+    cy.wait(1000)
+    cy.get('#profile-tab-list > a[data-index="0"]').click()
+    cy.wait(1000)
+    cy.scrollTo(0, 200)
+    cy.wait(5000)
+    cy.xpath('//*[@id="field-:rq:"]').should('have.value', getData.user8101995.PersonalNumber)
+    cy.xpath('//*[@id="field-:rq:"]').should('have.attr', 'readonly')
+    cy.xpath('//*[@id="field-:rr:"]').should('have.value', getData.user8101995.Email)
+    cy.xpath('//*[@id="field-:rr:"]').should('have.attr', 'readonly')
+    cy.xpath('//*[@id="field-:rs:"]').should('have.value', getData.user8101995.NamaLengkap)
+    cy.xpath('//*[@id="field-:rt:"]').should('have.value', getData.user8101995.Jabatan) //Business Analyst
+    cy.xpath('//*[@id="field-:ru:"]').should('have.value', getData.user8101995.NoTelepon)
+    cy.xpath('//*[@id="field-:rv:"]').should('have.value', getData.user8101995.Tempatlahir)
+    cy.xpath('//*[@id="field-:r10:"]').should('have.value', getData.user8101995.TanggalLahir)
+    cy.xpath('//*[@id="field-:r11:"]').should('have.value', getData.user8101995.NoRekeningPayroll)
+    cy.xpath('//*[@id="field-:r12:"]').should('have.value', getData.user8101995.UnitKerja) //Nasional
+  })
+
+  it(testingFrom.ProfileFlow.TS004, () => {
+    var data = execute.createTimeStamp()
+    cy.visit(get.env.STAGING_WEB_PORTAL);
+    cy.wait(3000)
+    cy.get('.css-13jvj27 > .chakra-button').click();
+    cy.wait(2000)
+    cy.get('[placeholder="Enter personal number"]').type(getData.user8100000.PersonalNumber)
+    cy.wait(1000)
+    cy.get('[placeholder="Enter your password"]').type(getData.user8100000.Password)
+    cy.wait(1000)
+    cy.get('.chakra-button').click()
+    cy.wait(5000)
+    cy.get('#profile-tab-list > a[data-index="2"]').click()
+    cy.wait(1000)
+    cy.get('.chakra-button').click()
+    cy.wait(1000)
+    cy.xpath('//*[@id="field-:rt:"]').type('Testing Aspiration Tanggal ' + data)
+    cy.wait(1000)
+    cy.xpath('//*[@id="field-:ru:"]').type('Testing Deskripsi Aspiration yang dikirim tanggal ' + data)
+    cy.wait(1000)
+    cy.xpath('//*[@id="chakra-modal-:ro:"]/footer/button').click()
+    cy.wait(3500)
+    cy.get('#toast-1-description').should('contain', 'Successfully send aspiration.')
+    cy.wait(1000)
+    cy.xpath('//*[@id="root"]/div[2]/div/div[2]/div/div/div[2]/div/div[2]/div[1]/div[2]/p[2]').click()
+    cy.wait(2000)
+    cy.xpath('//*[@id="chakra-modal--body-:r1g:"]/div/p').should('contain', 'Testing Deskripsi Aspiration yang dikirim tanggal ' + data)
+    cy.xpath('//*[@id="chakra-modal--header-:r1g:"]/p[1]').should('contain', 'Testing Aspiration Tanggal ' + data)
+    cy.wait(2000)
+  })
+  
+  it(testingFrom.ProfileFlow.TS005, () => {
+    var data = execute.createTimeStamp()
+    cy.visit(get.env.STAGING_WEB_PORTAL);
+    cy.wait(3000)
+    cy.get('.css-13jvj27 > .chakra-button').click();
+    cy.wait(2000)
+    cy.get('[placeholder="Enter personal number"]').type(getData.user8100000.PersonalNumber)
+    cy.wait(1000)
+    cy.get('[placeholder="Enter your password"]').type(getData.user8100000.Password)
+    cy.wait(1000)
+    cy.get('.chakra-button').click()
+    cy.wait(5000)
+    cy.get('#profile-tab-list > a[data-index="2"]').click()
+    cy.wait(1000)
+    cy.get('.chakra-button').click()
+    cy.wait(1000)
+    cy.xpath('//*[@id="field-:rt:"]').type('Testing Aspiration Tanggal ' + data)
+    cy.wait(1000)
+    cy.xpath('//*[@id="field-:ru:"]').type('Testing Deskripsi Aspiration yang dikirim tanggal ' + data)
+    cy.wait(1000)
+    cy.xpath('//*[@id="chakra-modal-:ro:"]/footer/button').click()
+    cy.wait(3500)
+    cy.get('#toast-1-description').should('contain', 'Successfully send aspiration.')
+    cy.wait(1000)
+    cy.xpath('//*[@id="root"]/div[2]/div/div[2]/div/div/div[2]/div/div[2]/div[1]/div[2]/p[2]').click()
+    cy.wait(2000)
+    cy.xpath('//*[@id="chakra-modal--body-:r1g:"]/div/p').should('contain', 'Testing Deskripsi Aspiration yang dikirim tanggal ' + data)
+    cy.xpath('//*[@id="chakra-modal--header-:r1g:"]/p[1]').should('contain', 'Testing Aspiration Tanggal ' + data)
+    cy.wait(2000)
+  })
+})
